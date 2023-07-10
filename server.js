@@ -3,6 +3,8 @@ const dotenv = require("dotenv")
 const cors = require("cors")
 const authRegister  = require("./router/auth.router")
 const studentRouter = require("./router/students.router")
+const groupRouter = require("./router/group.router")
+const {firebaseRouter} = require("./controller/firebase.ctr")
 
 const app = express();
 
@@ -17,6 +19,8 @@ app.use(express.json());
 
 app.use(authRegister)
 app.use(studentRouter)
+app.use(groupRouter)
+app.use(firebaseRouter)
 
 
 

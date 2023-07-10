@@ -1,4 +1,3 @@
-const { json } = require("sequelize")
 const { Students } = require("../model")
 
 Students.sync({ force: false })
@@ -32,8 +31,29 @@ const getStudents = async (req, res) => {
   }
 }
 
+const deleteStudent = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Students.destroy({
+      returning: true,
+      plain: true,
+      where: {
+        id,
+      },
+    });
+    return res.send("deleted student!");
+  }
+  catch (err) {
+    return res.send({
+      msg: err.message
+    })
+  }
+};
+
 
 module.exports = {
   addStudent,
-  getStudents
+  getStudents,
+  deleteStudent
 }
