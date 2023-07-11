@@ -1,4 +1,5 @@
 const { Groups } = require("../model")
+const { Teacher } = require("../model")
 
 Groups.sync({ force: false })
 
@@ -6,7 +7,14 @@ const addGroup = async (req, res) => {
   try {
     const { GroupYonalish, DarsKunlari, DarsVaqti, Oqituvchi, OqituvchTelNomer, oqituvchiRasm } = req.body
 
-    await Groups.create({ GroupYonalish, DarsKunlari, DarsVaqti, Oqituvchi, OqituvchTelNomer, oqituvchiRasm })
+    const teachers = await Teacher.findOne({ where: { oqituvchiIsmi: Oqituvchi } })
+
+    if (!teachers) {
+      await Groups.create({ GroupYonalish, DarsKunlari, DarsVaqti, Oqituvchi, OqituvchTelNomer, oqituvchiRasm }) 
+      && await Teacher.create({oqituvchiIsmi: Oqituvchi})
+    }else{
+      await Groups.create({ GroupYonalish, DarsKunlari, DarsVaqti, Oqituvchi, OqituvchTelNomer, oqituvchiRasm })
+    }
 
     return res.status(201).send({
       msg: "added group!"
@@ -30,6 +38,8 @@ const getGroups = async (req, res) => {
     })
   }
 }
+
+
 
 
 module.exports = {

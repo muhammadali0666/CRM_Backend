@@ -1,31 +1,28 @@
-const { sequelize, DataTypes } = require("../db/db.config")
+const { sequelize, DataTypes} = require("../db/db.config")
 const { UUIDV4 } = require("sequelize")
 
-const Students = sequelize.define("students", {
+const Payment = sequelize.define("payment", {
   id: {
     type: DataTypes.TEXT,
     defaultValue: UUIDV4,
     primaryKey: true
   },
 
-  name: {
+  oquvchiIsmi: {
     type: DataTypes.TEXT
   },
-  phoneNumber: {
+  yonalish: {
     type: DataTypes.TEXT
   },
-  science: {
+  number: {
     type: DataTypes.TEXT
   },
-  parentName: {
+  oqituvchiIsmi: {
     type: DataTypes.TEXT
   },
-  parentNumber: {
-    type: DataTypes.TEXT
-  },
-  picture: {
+  tolovKuni: {
     type: DataTypes.TEXT
   },
 })
 
-module.exports = Students;
+module.exports = Payment;

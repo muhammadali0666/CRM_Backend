@@ -1,4 +1,5 @@
 const { Students } = require("../model")
+const { Deletedstudents } = require("../model")
 
 Students.sync({ force: false })
 
@@ -35,6 +36,11 @@ const deleteStudent = async (req, res) => {
   try {
     const { id } = req.params;
 
+    const finder = await Students.findOne({ where: { id: id } })
+
+    await Deletedstudents.create({ name: finder.name, phoneNumber: finder.phoneNumber, science: finder.science, parentName: finder.parentName, parentNumber: finder.parentNumber, picture: finder.picture })
+
+
     await Students.destroy({
       returning: true,
       plain: true,
@@ -51,9 +57,40 @@ const deleteStudent = async (req, res) => {
   }
 };
 
+const search = async (req, res) => {
+  try {
+    const { search } = req.headers;
+
+    let searchToLowerCase = search.toLowerCase();
+
+    let searchValidation = searchToLowerCase.trim();
+
+    let objIsmsharif = await Students.findAll({
+      where: { name: searchValidation },
+    });
+    return res.status(201).send(objIsmsharif);
+  } catch (err) {
+    return res.send({ msg: err.message });
+  }
+};
+
+const allStudents = async (req, res) => {
+  try {
+    const students = await Students.findOne({ where: {} })
+    return res.json(students)
+  }
+  catch (err) {
+    return res.send({
+      msg: err.message
+    })
+  }
+}
+
 
 module.exports = {
   addStudent,
   getStudents,
-  deleteStudent
+  deleteStudent,
+  search,
+  allStudents
 }
