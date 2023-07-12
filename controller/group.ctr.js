@@ -56,11 +56,25 @@ const searchGroup = async (req, res) => {
   }
 };
 
+const getFullInfoGroup = async (req, res) => {
+  try {
+    const { id } = req.params
+    let group = await Groups.findAll({ where: { id: id } });
+    return res.json(group)
+  }
+  catch (err) {
+    return res.status(400).send({
+      msg: err.message
+    })
+  }
+}
+
 
 
 
 module.exports = {
   addGroup,
   getGroups,
-  searchGroup
+  searchGroup,
+  getFullInfoGroup
 }
