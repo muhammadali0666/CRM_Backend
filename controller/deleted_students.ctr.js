@@ -5,7 +5,6 @@ Deletedstudents.sync({ force: false })
 const getDeleted = async (req, res) => {
   try {
     const deleted = await Deletedstudents.findAll()
-
     return res.send(deleted)
   }
   catch (err) {

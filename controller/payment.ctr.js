@@ -31,8 +31,26 @@ const getPaymentors = async (req, res) => {
   }
 }
 
+const searchPayment = async (req, res) => {
+  try {
+    const { search } = req.headers;
+
+    let searchToLowerCase = search.toLowerCase();
+
+    let searchValidation = searchToLowerCase.trim();
+
+    let objIsmsharif = await Payment.findAll({
+      where: { oquvchiIsmi: searchValidation },
+    });
+    return res.status(201).send(objIsmsharif);
+  } catch (err) {
+    return res.send({ msg: err.message });
+  }
+};
+
 
 module.exports = {
   addPaymentor,
-  getPaymentors
+  getPaymentors,
+  searchPayment
 }

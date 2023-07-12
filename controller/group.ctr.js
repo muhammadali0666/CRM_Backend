@@ -39,10 +39,28 @@ const getGroups = async (req, res) => {
   }
 }
 
+const searchGroup = async (req, res) => {
+  try {
+    const { search } = req.headers;
+
+    let searchToLowerCase = search.toLowerCase();
+
+    let searchValidation = searchToLowerCase.trim();
+
+    let objIsmsharif = await Groups.findAll({
+      where: { GroupYonalish: searchValidation },
+    });
+    return res.status(201).send(objIsmsharif);
+  } catch (err) {
+    return res.send({ msg: err.message });
+  }
+};
+
 
 
 
 module.exports = {
   addGroup,
-  getGroups
+  getGroups,
+  searchGroup
 }
