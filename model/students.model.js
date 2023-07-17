@@ -26,6 +26,10 @@ const Students = sequelize.define("students", {
   picture: {
     type: DataTypes.TEXT
   },
+  pay:{
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  }
 })
 
 module.exports = Students;

@@ -1,5 +1,6 @@
 const { Groups } = require("../model")
 const { Teacher } = require("../model")
+const { Students } = require("../model")
 
 Groups.sync({ force: false })
 
@@ -10,9 +11,9 @@ const addGroup = async (req, res) => {
     const teachers = await Teacher.findOne({ where: { oqituvchiIsmi: Oqituvchi } })
 
     if (!teachers) {
-      await Groups.create({ GroupYonalish, DarsKunlari, DarsVaqti, Oqituvchi, OqituvchTelNomer, oqituvchiRasm }) 
-      && await Teacher.create({oqituvchiIsmi: Oqituvchi})
-    }else{
+      await Groups.create({ GroupYonalish, DarsKunlari, DarsVaqti, Oqituvchi, OqituvchTelNomer, oqituvchiRasm })
+        && await Teacher.create({ oqituvchiIsmi: Oqituvchi })
+    } else {
       await Groups.create({ GroupYonalish, DarsKunlari, DarsVaqti, Oqituvchi, OqituvchTelNomer, oqituvchiRasm })
     }
 
@@ -29,8 +30,9 @@ const addGroup = async (req, res) => {
 
 const getGroups = async (req, res) => {
   try {
-    const students = await Groups.findAll()
-    return res.json(students)
+    // const students = await Students.findOne({where: {science}})
+    const groups = await Groups.findAll()
+    return res.json(groups)
   }
   catch (err) {
     return res.send({

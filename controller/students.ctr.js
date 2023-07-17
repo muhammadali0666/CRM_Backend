@@ -1,5 +1,6 @@
 const { Students } = require("../model")
 const { Deletedstudents } = require("../model")
+const { Groups } = require("../model")
 
 Students.sync({ force: false })
 
@@ -86,11 +87,27 @@ const allStudents = async (req, res) => {
   }
 }
 
+const getFullInfoStudent = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const result = await Groups.findOne({ where: { id: id } })
+    const student = await Students.findAll({ where: { science: result.GroupYonalish } });
+    return res.json(student)
+  }
+  catch (err) {
+    return res.status(400).send({
+      msg: err.message
+    })
+  }
+}
+
 
 module.exports = {
   addStudent,
   getStudents,
   deleteStudent,
   search,
-  allStudents
+  allStudents,
+  getFullInfoStudent
 }

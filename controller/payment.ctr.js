@@ -1,4 +1,5 @@
 const { Payment } = require("../model")
+const { Students } = require("../model")
 
 Payment.sync({ force: false })
 
@@ -8,9 +9,28 @@ const addPaymentor = async (req, res) => {
 
     await Payment.create({ oquvchiIsmi, yonalish, number, oqituvchiIsmi, tolovKuni })
 
-    return res.status(201).send({
-      msg: "added payment!"
-    })
+    const changer = await Students.findAll({ where: { name: oquvchiIsmi } })
+
+    const resultId = changer[0].id
+
+    if (changer) {
+      await Students.update(
+        { pay: true },
+        {
+          returning: true,
+          plain: false,
+          where: {
+            id: resultId
+          },
+        }
+      );
+    }
+
+    return res.send(changer.filter((e) => e));
+
+    // return res.status(201).send({
+    //   msg: "added payment!"
+    // })
   }
   catch (err) {
     return res.send({

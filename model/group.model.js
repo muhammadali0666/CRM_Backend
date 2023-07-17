@@ -23,6 +23,9 @@ const Groups = sequelize.define("groups", {
   OqituvchTelNomer: {
     type: DataTypes.TEXT
   },
+  oquvchiSoni: {
+    type: DataTypes.INTEGER
+  },
   oqituvchiRasm: {
     type: DataTypes.TEXT
   },
