@@ -1,6 +1,6 @@
 const { Groups } = require("../model")
 const { Teacher } = require("../model")
-const { Students } = require("../model")
+// const { Students } = require("../model")
 
 Groups.sync({ force: false })
 
