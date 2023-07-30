@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { Users } = require("../model")
+const { userValidation } = require("../validation/auth.validate");
 
 const verifyAdmin = async (req, res, next) => {
   const token = req.headers.token
@@ -34,7 +35,21 @@ const verifyToken = async (req, res, next) => {
   return next();
 };
 
+const userValidate = function (req, res, next) {
+  try {
+    const { error } = userValidation(req.body);
+    if (error) {
+      console.log(error);
+      return res.status(400).json({ msg: error.details[0].message });
+    }
+    next();
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 module.exports = {
   verifyAdmin,
-  verifyToken
+  verifyToken,
+  userValidate
 }

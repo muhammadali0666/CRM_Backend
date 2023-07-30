@@ -1,0 +1,62 @@
+
+POST http://localhost:4001/register
+Content-Type: application/json
+
+{
+        "username": "Anvar",
+        "email": "sdffds@gmail.com",
+        "password": "swagaewrew"
+}
+
+# ###
+# GET http://localhost:3030/user_list
+
+# ###
+# GET http://localhost:3030/get_user/5001c998-33fb-4cbc-874f-4c900b9326ed
+
+# ###
+# DELETE http://localhost:3030/get_user/5001c998-33fb-4cbc-874f-4c900b9326ed
+
+# ###
+# PUT http://localhost:3030/update_user/97cf3e68-dee4-4e24-a10c-35bfe525ac21
+# Content-Type: application/json
+
+# {
+#         "username": "Toshmat",
+#         "email": "swagger_example@gmail.com",
+#         "password": "swag",
+#         "comfirm_password": "swag",
+#         "isLogged": false,
+#         "age": 12
+# }
+
+# /////////////////////////////////////////////////
+
+# ###
+# POST http://localhost:3030/create_animal
+# Content-Type: application/json
+
+# {
+#        "title": "dog",
+#        "color": "black",
+#        "type": "pet"
+# }
+
+# ###
+# GET http://localhost:3030/animal_list
+
+# ###
+# GET http://localhost:3030/get_Animal/341cf016-393c-4ca4-8305-11cee2ec5551
+
+# ###
+# DELETE http://localhost:3030/delete_animal/341cf016-393c-4ca4-8305-11cee2ec5551
+
+# ###
+# PUT http://localhost:3030/update_animal/341cf016-393c-4ca4-8305-11cee2ec5551
+# Content-Type: application/json
+
+# {
+#           "title": "cat",
+#        "color": "yellow",
+#        "type": "pet"
+# }
