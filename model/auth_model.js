@@ -21,6 +21,9 @@ const Users = sequelize.define("auth", {
     type: DataTypes.TEXT,
     defaultValue: 'user'
   },
+  token: {
+    type: DataTypes.TEXT
+  },
 })
 
 module.exports = Users;

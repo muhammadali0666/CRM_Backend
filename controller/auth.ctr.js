@@ -1,6 +1,7 @@
 const { Users } = require("../model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const nodemailer = require('nodemailer');
 
 Users.sync({ force: false })
 
@@ -30,7 +31,7 @@ const authRegister = async (req, res) => {
     }
     catch (err) {
         return res.send({
-            msg: "Some server error"
+            msg: err.message
         })
     }
 
@@ -59,7 +60,53 @@ const authLogin = async (req, res) => {
                     expiresIn: process.env.TIME
                 }
             )
-            return res.send({
+
+            ///////////////////////////////////
+            const userId = user.id
+        
+            if (user) {
+              await Users.update(
+                { token: token },
+                {
+                  returning: true,
+                  plain: false,
+                  where: {
+                    id: userId
+                  },
+                }
+              );
+            }
+            //////////////////////////////////////////
+
+            // const transporter = nodemailer.createTransport({
+            //     service: 'gmail',
+            //     auth: {
+            //       user: process.env.EMAIL,
+            //       pass: process.env.EMAILPASS
+            //     }
+            //   });
+            
+            //   let val = Math.random() * 100000
+            
+            //   const confirmationCode = val.toString().split('').splice(0,5).join('')-0
+
+            //   const mailOptions = {
+            //     from: process.env.EMAIL,
+            //     to: `${email}`,
+            //     subject: 'Your confirmation code:',
+            //     html: `<b>confirmation code: ${confirmationCode}</b>`
+            //   };
+            
+            //   transporter.sendMail(mailOptions, function (error, info) {
+            //     if (error) {
+            //       console.log(error);
+            //     } else {
+            //       console.log('Email sent: ' + info.response);
+            //     }
+            //   })
+            
+            //////////////////////////////////
+            return res.status(200).send({
                 msg: "Success",
                 token,
             });
