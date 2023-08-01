@@ -2,13 +2,7 @@ const { Sequelize, DataTypes } = require("sequelize")
 const dotenv = require("dotenv")
 
 dotenv.config()
-const sequelize = new Sequelize({
-    username: "postgres",
-    database: "crm_db",
-    password: process.env.PASSWORD,
-    port: 5432,
-    host: "localhost",
-    dialect: "postgres",
+const sequelize = new Sequelize("postgres://sdkflopp:FyrhQRIVFX9Fs1hsLg6IifEH4BzCyQL_@floppy.db.elephantsql.com/sdkflopp",{
     logging: false
 })
 
