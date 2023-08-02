@@ -1,5 +1,16 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+  "version": 2,
+  "name": "socetting",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
   ]
 }
