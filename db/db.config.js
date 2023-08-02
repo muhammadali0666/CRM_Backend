@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require("sequelize")
 const dotenv = require("dotenv")
 
 dotenv.config()
-const sequelize = new Sequelize("postgres://sdkflopp:FyrhQRIVFX9Fs1hsLg6IifEH4BzCyQL_@floppy.db.elephantsql.com/sdkflopp",{
+const sequelize = new Sequelize("postgres://default:************@ep-gentle-violet-77044958.us-east-1.postgres.vercel-storage.com:5432/verceldb",{
     logging: false
 })
 
