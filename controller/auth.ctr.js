@@ -61,23 +61,6 @@ const authLogin = async (req, res) => {
                 }
             )
 
-            ///////////////////////////////////
-            const userId = user.id
-        
-            if (user) {
-              await Users.update(
-                { token: token },
-                {
-                  returning: true,
-                  plain: false,
-                  where: {
-                    id: userId
-                  },
-                }
-              );
-            }
-            //////////////////////////////////////////
-
             // const transporter = nodemailer.createTransport({
             //     service: 'gmail',
             //     auth: {

@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 const authRegister = require("./router/auth.router")
 const studentRouter = require("./router/students.router")
 const groupRouter = require("./router/group.router")
-const { firebaseRouter } = require("./controller/firebase.ctr")
+// const { firebaseRouter } = require("./controller/firebase.ctr")
 const paymentRouter = require("./router/payment.router")
 const teacherRouter = require("./router/teacher.router")
 const deletedRouter = require("./router/deleted_students_router")
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(authRegister)
 app.use(studentRouter)
 app.use(groupRouter)
-app.use(firebaseRouter)
+// app.use(firebaseRouter)
 app.use(paymentRouter)
 app.use(teacherRouter)
 app.use(deletedRouter)
@@ -77,5 +77,5 @@ app.post('/send_gmail', (req, res) => {
 //////////////////////////
 
 app.listen(PORT, () => {
-  console.log(`Server is running on ${PORT} the Port`);
+  console.log(`Server is running on the ${PORT} Port`);
 })
