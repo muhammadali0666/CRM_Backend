@@ -8,6 +8,12 @@ const addStudent = async (req, res) => {
   try {
     const { name, phoneNumber, science, parentName, parentNumber, picture } = req.body
 
+    if(!name || !phoneNumber || !science || !parentName || !parentNumber){
+      return res.status(201).send({
+        msg: "datas require!"
+      })
+    }
+
     await Students.create({ name, phoneNumber, science, parentName, parentNumber, picture })
 
     return res.status(201).send({

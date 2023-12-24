@@ -8,6 +8,18 @@ const addGroup = async (req, res) => {
   try {
     const { GroupYonalish, DarsKunlari, DarsVaqti, Oqituvchi, OqituvchTelNomer, oqituvchiRasm } = req.body
 
+    if(!GroupYonalish || !DarsKunlari || !DarsVaqti || !Oqituvchi || !OqituvchTelNomer || !oqituvchiRasm){
+      return res.status(201).send({
+        msg: "datas require!"
+      })
+      } else if(!oqituvchiRasm){
+      return res.status(201).send({
+        msg: "pictures require!"
+      })
+    }
+
+
+
     const teachers = await Teacher.findOne({ where: { oqituvchiIsmi: Oqituvchi } })
 
     if (!teachers) {

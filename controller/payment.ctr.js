@@ -7,6 +7,12 @@ const addPaymentor = async (req, res) => {
   try {
     const { oquvchiIsmi, yonalish, number, oqituvchiIsmi, tolovKuni } = req.body
 
+    if(!oquvchiIsmi || !yonalish || !number || !oqituvchiIsmi || !tolovKuni){
+      return res.status(201).send({
+        msg: "datas require!"
+      })
+    }
+
     await Payment.create({ oquvchiIsmi, yonalish, number, oqituvchiIsmi, tolovKuni })
 
     const changer = await Students.findAll({ where: { name: oquvchiIsmi } })
