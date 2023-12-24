@@ -14,7 +14,31 @@ const getDeleted = async (req, res) => {
   }
 }
 
+const deleteRemovingStudent = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Deletedstudents.findOne({ where: { id: id } })
+
+
+    await Deletedstudents.destroy({
+      returning: true,
+      plain: true,
+      where: {
+        id,
+      },
+    });
+    return res.send("deleted student!");
+  }
+  catch (err) {
+    return res.send({
+      msg: err.message
+    })
+  }
+};
+
 
 module.exports = {
-  getDeleted
+  getDeleted,
+  deleteRemovingStudent
 }
