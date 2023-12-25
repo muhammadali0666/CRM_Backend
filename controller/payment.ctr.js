@@ -74,9 +74,35 @@ const searchPayment = async (req, res) => {
   }
 };
 
+const deletePaymentor = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Payment.findOne({ where: { id: id } })
+
+
+    await Payment.destroy({
+      returning: true,
+      plain: true,
+      where: {
+        id,
+      },
+    });
+    return res.send({
+      msg: "deleted paymentor!"
+    });
+  }
+  catch (err) {
+    return res.send({
+      msg: err.message
+    })
+  }
+};
+
 
 module.exports = {
   addPaymentor,
   getPaymentors,
-  searchPayment
+  searchPayment,
+  deletePaymentor
 }

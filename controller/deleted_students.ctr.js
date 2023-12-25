@@ -28,7 +28,9 @@ const deleteRemovingStudent = async (req, res) => {
         id,
       },
     });
-    return res.send("deleted student!");
+    return res.send({
+      msg: "deleted student!"
+    });
   }
   catch (err) {
     return res.send({
