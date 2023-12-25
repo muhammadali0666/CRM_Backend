@@ -4,6 +4,7 @@ const Groups = require("./group.model")
 const Payment = require("./payment.model")
 const Teacher = require("./teacher.model")
 const Deletedstudents = require("./deleted_students_model")
+const Telegram = require("./telegram_model")
 
 module.exports = {
     Users,
@@ -11,5 +12,6 @@ module.exports = {
     Groups,
     Payment,
     Teacher,
-    Deletedstudents
+    Deletedstudents,
+    Telegram
 }

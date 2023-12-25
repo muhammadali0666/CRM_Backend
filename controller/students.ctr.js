@@ -31,9 +31,8 @@ const getStudents = async (req, res) => {
   try {
     const students = await Students.findAll()
 
-    const convertedTime = students[0].dataValues.createdAt
+    // const convertedTime = students[0].dataValues.createdAt
 
-    console.log(convertedTime);
     return res.json(students)
   }
   catch (err) {
