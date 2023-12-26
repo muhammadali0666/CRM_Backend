@@ -32,11 +32,12 @@ const addPaymentor = async (req, res) => {
       );
     }
 
-    return res.send(changer.filter((e) => e));
+    // return res.send(changer.filter((e) => e));
 
-    // return res.status(201).send({
-    //   msg: "added payment!"
-    // })
+    return res.status(201).send({
+      data: changer.filter((e) => e),
+      msg: "added payment!"
+    })
   }
   catch (err) {
     return res.send({

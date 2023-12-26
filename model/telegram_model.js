@@ -14,9 +14,6 @@ const Telegram = sequelize.define("telegram", {
   userName: {
     type: DataTypes.TEXT
   },
-  chatId: {
-    type: DataTypes.INTEGER
-  },
   text: {
     type: DataTypes.TEXT
   },

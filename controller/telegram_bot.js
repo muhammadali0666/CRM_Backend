@@ -21,10 +21,9 @@ bot.on("text", async (ctx) => {
   let formattedTime = hours + ":" + minutes;
 
   await Telegram.create({
-    firstName: ctx.from.first_name,
-    userName: ctx.from.username || "without username",
-    chatId: ctx.chat.id,
-    text: ctx.text,
+    firstName: ctx?.from?.first_name,
+    userName: ctx?.from?.username || "without username",
+    text: ctx?.text,
     date: formattedDate,
     time: formattedTime,
   });
@@ -98,5 +97,5 @@ module.exports = bot;
 module.exports = {
   deleteTelegramUser,
   getMessage,
-  getMessageByDay
+  getMessageByDay,
 };

@@ -32,7 +32,33 @@ const getTeachers = async (req, res) => {
   }
 }
 
+const deleteTeacher = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Teacher.findOne({ where: { id: id } })
+
+
+    await Teacher.destroy({
+      returning: true,
+      plain: true,
+      where: {
+        id,
+      },
+    });
+    return res.send({
+      msg: "delete teacher!"
+    });
+  }
+  catch (err) {
+    return res.send({
+      msg: err.message
+    })
+  }
+};
+
 module.exports = {
   getTeachers,
-  addTeacher
+  addTeacher,
+  deleteTeacher
 }
