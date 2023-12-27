@@ -53,14 +53,24 @@ const getMessageByDay = async (req, res) => {
 
    let currentDateWithClass = currentDate.getDate() + "." + convertedMonth + "." + currentDate.getFullYear()
 
-  let finish = getDate.filter((check) => {
-    return check === currentDateWithClass
-  } )
-  if(finish) {
-    return res.json(message);
-  }else{
-    return res.json(message)
-  }
+    let finish = getDate.filter((check) => {
+      return check === currentDateWithClass
+    } )
+
+    if(!finish) {
+      return res.status(400).send({
+        msg: "bugun murojatlar yo'q"
+      })
+    }
+
+    let arrOneDay = []
+    message.forEach((element) => {
+      if(finish[0] == element.dataValues.date){
+        arrOneDay.push(element)
+      }
+    })
+
+    return res.json(arrOneDay);
 
   } catch (err) {
     return res.send({
